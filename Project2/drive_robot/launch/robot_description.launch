@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- send urdf to param server -->
+	<param command="$(find xacro)/xacro --inorder '$(find drive_robot)/urdf/drive_robot.xacro'" name="robot_description"/>
+	<!-- Send fake joint values-->
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+		<param name="use_gui" value="false"/>
+	</node>
+	<!-- Send robot states to tf -->
+	<node name="robot_state_publisher" output="screen" pkg="robot_state_publisher" respawn="false" type="robot_state_publisher"/>
+</launch>
